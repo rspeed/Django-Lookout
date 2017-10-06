@@ -1,0 +1,14 @@
+[
+	{
+		"type": "deprecation",
+		"age": 10,
+		"url": "https://example.com/",
+		"body": {
+			"id": "websql",
+			"anticipatedRemoval": "1/1/2020",
+			"message": "WebSQL is deprecated and will be removed in Chrome 97 around January 2020",
+			"sourceFile": "https://foo.com/index.js",
+			"lineNumber": 1234
+		}
+	}
+]
