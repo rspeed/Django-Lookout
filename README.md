@@ -9,7 +9,9 @@ Note: This project does not attempt to enable reporting.
 
 **Warning: This project is not yet on PyPI, so these instructions aren't functional.**
 
-`pip install Django-HTTP-Reporting-API`
+```bash
+pip install Django-HTTP-Reporting-API
+```
 
 Add the app to your Django project's `settings.py`:
 
