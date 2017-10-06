@@ -1,0 +1,19 @@
+# EditorConfig: http://editorconfig.org
+
+# top-most EditorConfig file
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Double quote for UI strings
+quote_type = single
+
+# Yes, I am a monster
+indent_size = tab
+indent_size = tab
+max_line_length = off
