@@ -1,7 +1,8 @@
 from logging import getLogger
-from datetime import datetime
 import json
 import jsonschema
+
+from django.utils import timezone
 
 from .exceptions import UnknownSchemaError
 
@@ -12,95 +13,137 @@ logger = getLogger(__name__)
 
 
 
-class ReportSchema:
-	@staticmethod
-	def from_json (report_json):
-		""" Factory to validate and instantiate reports based on their schema. """
+class BaseSchema:
+
+	@property
+	def SCHEMA (self):
+		""" A dictionary representing the JSON schema of a certain type of incident report. """
+		return NotImplementedError()
+
+	data = {}
+
+	# Caches a JSON-serialized version of the report data.
+	# It should only be access by casting the object to a string.
+	_serialized = None
+
+
+	@classmethod
+	def from_json (cls, report_json):
+		""" Factory to instantiate incident report objects based on their schema. """
 
 		logger.debug("Decoding JSON")
+		report_datum = json.loads(report_json)
 
-		report = json.loads(report_json)
+		# Wrap single reports in a list
+		if not isinstance(report_datum, list):
+			report_datum = [report_datum]
 
-		logger.debug("Attempt to determine the type of report by testing each schema.")
+		for report_data in report_datum:
+			logger.debug("Attempt to determine the type of report by testing each schema.")
 
+			yield cls.get_matching_schema(report_data)
+
+
+	@staticmethod
+	def get_matching_schema (report_data):
+		""" Returns a BaseSchema-subclassed object containing the report_data. """
 		for schema in [ReportSchema, CSPSchema, HPKPSchema]:
 			logger.debug("Trying {}".format(schema))
 
-			if schema.is_valid(report):
+			if schema.is_valid(report_data):
 				logger.debug("Validated as {}".format(schema))
 
-				return schema(report, report_json)
+				# Create the schema object
+				return schema(report_data)
 
 		logger.warning("No schemas matched!")
 		raise UnknownSchemaError()
 
 
 	@classmethod
-	def is_valid (cls, report):
+	def is_valid (cls, report_data):
+		""" Checks to see if the report data matches the schema. """
 		try:
-			jsonschema.validate(report, cls.SCHEMA)
+			jsonschema.validate(report_data, cls.SCHEMA)
 		except jsonschema.ValidationError:
 			return False
 		else:
 			return True
 
 
-	def __init__(self, report, report_json):
-		self.report = self.normalize(report)
-		self.report_json = report_json
+	@staticmethod
+	def normalize(report_data):
+		""" Used by subclasses to adapt legacy schemas. """
+
+		return report_data
+
+
+	def __init__(self, report_data):
+		self.data = self.normalize(report_data)
 
 
 	# TODO Some form of template
 	def __str__(self):
-		return self.report_json
+		# Re-serialize the data
+		if self._serialized is None:
+			self._serialized = json.dumps(self.data)
+
+		return self._serialized
 
 
+	def __iter__ (self):
+		""" Allows the object to be iterated and (more importantly) cast to a dict. """
+
+		return iter(self.data.items())
+
+
+
+class ReportSchema (BaseSchema):
+	""" Represents a HTTP Reporting API incident report bound to a definition of its schema. """
+
+	# TODO Add definitions and dependencies for each type/body combination.
 	SCHEMA = {
-		"id": "",
-		"$schema": "http://json-schema.org/draft-04/schema#",
-		'title': 'HTTP Reporting API Reports',
-		'description': "A collection of reports submitted by a user agent.",
-		'type': 'array',
-		'minItems': 1,
-		'items': {
-			'type': 'object',
-			'required': ['type', 'age', 'url', 'body'],
-			'properties': {
-				'type': {
-					'description': "The type of data the report contains.",
-					'type': 'string'
-				},
-				'age': {
-					'description': "The number of milliseconds between the report's timestamp and the current time.",
-					'type': 'integer'
-				},
-				'url': {
-					'description': "The URL of the page which triggered the report.",
-					'type': 'string',
-					'format': 'url'
-				},
-				'body': {
-					'description': "The contents of the report as defined by the type.",
-					'type': 'object'
-				}
+		'$schema': "http://json-schema.org/draft-04/schema#",
+		'title': "HTTP Reporting API incident report",
+		'description': "An incident report submitted by a user agent.",
+		'type': 'object',
+		'required': ['type', 'age', 'url', 'body'],
+		'properties': {
+			'type': {
+				'description': "The type of data the report contains.",
+				'type': 'string'
+			},
+			'age': {
+				'description': "The number of milliseconds between the report's timestamp and the current time.",
+				'type': 'integer'
+			},
+			'url': {
+				'description': "The URL of the page which triggered the report.",
+				'type': 'string',
+				'format': 'url'
+			},
+			'body': {
+				'description': "The contents of the report as defined by the type.",
+				'type': 'object'
 			}
 		}
 	}
 
 
-	@staticmethod
-	def normalize(report):
-		return report
 
+class CSPSchema (BaseSchema):
+	"""
+	Represents a legacy Content Security Policy incident report bound to a definition of its schema.
+	Wrapped in a base HTTP Reporting API incident schema.
+	"""
 
-
-class CSPSchema (ReportSchema):
 	SCHEMA = {
-		'$schema': 'http://json-schema.org/draft-06/schema#',
+		'$schema': 'http://json-schema.org/draft-04/schema#',
 		'title': 'Content Security Policy Report',
-		'description': "A report sent by a user agent when a CSP is violated.",
+		'description': "An incident report sent by a user agent when a CSP is violated.",
 		'type': 'object',
 		'required': ['csp-report'],
+		'additionalProperties': False,
 		'properties': {
 			'csp-report': {
 				'type': 'object',
@@ -139,22 +182,25 @@ class CSPSchema (ReportSchema):
 		}
 	}
 
+
 	@staticmethod
-	def normalize(report):
-		report_body = report['csp-report']
-		new_report = {
+	def normalize (report_data):
+		""" Adapts the legacy CSP schema. """
+
+		report_data = report_data['csp-report']
+
+		return {
 			'type': 'csp',
 			'age': 0,  # CSP reports don't provide a date :\
-			'url': report_body.pop('document-uri'),
-			'body': report_body
+			'url': report_data.pop('document-uri'),
+			'body': report_data
 		}
-		return new_report
 
 
 
-class HPKPSchema (ReportSchema):
+class HPKPSchema (BaseSchema):
 	SCHEMA = {
-		'$schema': 'http://json-schema.org/draft-06/schema#',
+		'$schema': 'http://json-schema.org/draft-04/schema#',
 		'title': 'HTTP Public Key Pinning Report',
 		'description': "A report sent by a user agent when a HPKP policy is violated.",
 		'type': 'object',
@@ -230,14 +276,13 @@ class HPKPSchema (ReportSchema):
 
 
 	@staticmethod
-	def normalize (report):
-		""" Normalize HPKP schema to HTTP Reporting API schema """
+	def normalize (report_data):
+		""" Adapts the legacy HPKP schema to the HTTP Reporting API schema """
 
-		new_report = {
+		return {
 			'type': 'hpkp',
-			'age': datetime.now() - report.pop('date-time'),
-			'url': 'https://{}/'.format(report.pop('hostname')),
-			'body': report
+			'age': timezone.now() - report_data.pop('date-time'),
+			'url': 'https://{}/'.format(report_data.pop('hostname')),
+			'body': report_data
 		}
-		return new_report
 

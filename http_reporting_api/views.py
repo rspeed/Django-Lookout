@@ -29,14 +29,17 @@ class ReportView (View):
 		""" Handles the POST request. """
 
 		try:
-			report = ReportSchema.from_json(request.body.decode('utf8'))
+			reports = ReportSchema.from_json(request.body.decode('utf8'))
+
+			# Log the reports
+			for report in reports:
+				logger.error(ReportMessage(report=report))
+
 		except JSONDecodeError:
 			return HttpResponseBadRequest("Request body was not valid JSON.")
+
 		except UnknownSchemaError:
 			return HttpResponseBadRequest("Request body didn't match any known schema.")
-
-		# Log the report
-		logger.error(ReportMessage(report=report))
 
 		# Return an empty HTTP 200
 		return HttpResponse('')

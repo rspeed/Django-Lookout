@@ -1,11 +1,12 @@
 import logging
 import json
 
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 from django.db import models
 from django.utils import formats
 from django.utils.safestring import mark_safe
+from django.utils import timezone
 
 from pygments import highlight
 from pygments.lexers.data import JsonLexer
@@ -19,8 +20,33 @@ __all__ = ['Report']
 
 
 
+class ReportManager (models.Manager):
+	def create_from_schema (self, report):
+		""" Converts a parsed JSON report into a model instance. """
+
+		# Report data as a dictionary
+		data = dict(report)
+
+		# Use a static datetime object to make sure `created`, `generated`, and `body['age']` are consistent
+		now = timezone.now()
+
+		# Build the model instance
+		return self.create(
+			created=now,
+			type=data['type'],
+			# Use the report's `age` property to determine when it was generated
+			generated=now - timedelta(milliseconds=data['age']),
+			url=data['url'],
+			# Store the serialized version
+			body=str(report)
+		)
+
+
+
 class Report (models.Model):
 	""" A report filed through the HTTP Reporting API. """
+
+	objects = ReportManager()
 
 	created = models.DateTimeField(auto_now_add=True, primary_key=True)
 
@@ -51,23 +77,3 @@ class Report (models.Model):
 		return "{} report from {}".format(self.type.capitalize(), formats.date_format(self.created, 'SHORT_DATETIME_FORMAT'))
 
 
-
-
-	@classmethod
-	def create_from_object (cls, report, report_json=None):
-		""" Converts a parsed JSON report into a model instance. """
-
-		# Use a static datetime object to make sure `created`, `generated`, and `body['age']` are consistent
-		now = datetime.now()
-
-		# Use the report's `age` property to determine when it was generated
-		generated = now - timedelta(milliseconds=report['age'])
-
-		# Convert the report object back to JSON if it wasn't provided
-		if report_json is None:
-			report_json = json.dumps(report)
-
-		# Build the model instance
-		self = cls(created=now, type=report['type'], generated=generated, url=report['url'], body=report_json)
-		self.save()
-		return self
