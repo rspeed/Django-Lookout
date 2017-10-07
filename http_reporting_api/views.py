@@ -7,6 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from .logging import ReportMessage
 from .schemas import ReportSchema
+from .exceptions import JSONDecodeError, UnknownSchemaError
 
 
 __all__ = ['ReportView']
@@ -23,14 +24,16 @@ class ReportView (View):
 	http_method_names = ['post']
 
 
-	def post(self, request):
+	@staticmethod
+	def post(request):
 		""" Handles the POST request. """
 
 		try:
 			report = ReportSchema.from_json(request.body.decode('utf8'))
-		except Exception as e:
-			# TODO Implement custom exceptions
+		except JSONDecodeError:
 			return HttpResponseBadRequest("Request body was not valid JSON.")
+		except UnknownSchemaError:
+			return HttpResponseBadRequest("Request body didn't match any known schema.")
 
 		# Log the report
 		logger.error(ReportMessage(report=report))

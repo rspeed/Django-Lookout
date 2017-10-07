@@ -3,6 +3,8 @@ from datetime import datetime
 import json
 import jsonschema
 
+from .exceptions import UnknownSchemaError
+
 
 __all__ = ['ReportSchema', 'CSPSchema', 'HPKPSchema']
 
@@ -25,11 +27,12 @@ class ReportSchema:
 			logger.debug("Trying {}".format(schema))
 
 			if schema.is_valid(report):
-				logger.debug("{} matched".format(schema))
+				logger.debug("Validated as {}".format(schema))
 
 				return schema(report, report_json)
 
-		logger.error("No schemas matched!")
+		logger.warning("No schemas matched!")
+		raise UnknownSchemaError()
 
 
 	@classmethod
