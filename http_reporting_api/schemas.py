@@ -162,6 +162,10 @@ class CSPSchema (BaseSchema):
 						'description': "The policy directive that triggered the report.",
 						'type': 'string'
 					},
+					'effective-directive': {
+						'type': 'string',
+						'description': "The policy directive that was violated. Generally equivalent to `violated-directive`."
+					},
 					'blocked-uri': {
 						'description': "The URL of the resource which violated the policy.",
 						'type': 'string',
@@ -172,10 +176,26 @@ class CSPSchema (BaseSchema):
 						'type': 'string',
 						'format': 'url'
 					},
+					'status-code': {
+						'description': "The HTTP status code of the request which triggered the report.",
+						'type': 'integer'
+					},
 					'disposition': {
 						'description': "Whether the violation was enforced or just reported.",
 						'type': 'string',
 						'enum': ['enforce', 'report']
+					},
+					'source-file': {
+						'type': 'string',
+						'description': "The URL of the resource where action which triggered the violation initiated."
+					},
+					'line-number': {
+						'type': 'number',
+						'description': "The line number in source-file on which the violation occurred."
+					},
+					'column-number': {
+						'type': 'number',
+						'description': "The column number in source-file on which the violation occurred."
 					}
 				}
 			}
