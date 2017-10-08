@@ -229,8 +229,7 @@ class HPKPSchema (BaseSchema):
 			'date-time': {
 				'description': "The time the user agent observed the pin validation failure.",
 				'type': 'string',
-				'format': 'date-time',
-				'example': '2014-04-06T13:00:50Z'
+				'format': 'date-time'
 			},
 			'hostname': {
 				'description': "The hostname to which the user agent made the original request that failed pin validation.",
@@ -239,13 +238,11 @@ class HPKPSchema (BaseSchema):
 					{'format': 'hostname'},
 					{'format': 'ipv4'},
 					{'format': 'ipv6'}
-				],
-				'example': 'www.example.com'
+				]
 			},
 			'port': {
 				'description': "The port to which the user agent made the original request that failed pin validation.",
-				'type': 'integer',
-				'example': 443
+				'type': 'integer'
 			},
 			'noted-hostname': {
 				'description': "The hostname that the user agent noted when it noted the known pinned host.",
@@ -254,8 +251,7 @@ class HPKPSchema (BaseSchema):
 					{'format': 'hostname'},
 					{'format': 'ipv4'},
 					{'format': 'ipv6'}
-				],
-				'example': 'foo.example.com'
+				]
 			},
 			'include-subdomains': {
 				'description': "Whether or not the user agent has noted the includeSubDomains directive for the known pinned host.",
@@ -288,8 +284,7 @@ class HPKPSchema (BaseSchema):
 			'effective-expiration-date': {
 				'description': "The effective expiration date for the noted pins.",
 				'type': 'string',
-				'format': 'date-time',
-				'example': '2014-05-01T12:40:50Z'
+				'format': 'date-time'
 			}
 		}
 	}
