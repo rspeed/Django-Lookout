@@ -21,16 +21,7 @@ def package_version():
 		# The package isn't installed
 		pass
 
-	# setuptools_scm
-	try:
-		from setuptools_scm import get_version
-
-		return get_version(get_version(root='..', relative_to=__file__))
-	except ImportError:
-		# That's not installed either!
-		pass
-
-	return 0
+	return None
 
 
 __version__ = package_version()
