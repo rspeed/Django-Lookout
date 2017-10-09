@@ -49,14 +49,14 @@ class LazyReadmeConverter:
 
 
 setup(
-	name='Django-HTTP-Reporting-API',
+	name='Django-Lookout',
 
-	use_scm_version={'write_to': 'http_reporting_api/VERSION.txt'},
+	use_scm_version={'write_to': 'lookout/VERSION.txt'},
 
 	description='API endpoint for receiving incident reports from Content Security Policy (CSP), HTTP Public Key Pinning (HPKP), and the HTTP Reporting API.',
 	long_description=LazyReadmeConverter(path.join(path.abspath(path.dirname(__file__)), 'README.md')),
 
-	url='https://github.com/rspeed/Django-HTTP-Reporting-API',
+	url='https://github.com/rspeed/Django-Lookout',
 
 	author='Rob Speed',
 	author_email='rspeed@bounteo.us',
@@ -66,7 +66,7 @@ setup(
 		'tests.*'
 	]),
 	package_data={
-		'http_reporting_api': ['VERSION.txt']
+		'lookout': ['VERSION.txt']
 	},
 	include_package_data=True,
 

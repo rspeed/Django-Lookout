@@ -13,7 +13,7 @@ from .exceptions import JSONDecodeError, UnknownSchemaError
 __all__ = ['ReportView']
 
 
-logger = logging.getLogger('http_reporting_api')
+logger = logging.getLogger('lookout')
 
 
 

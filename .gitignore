@@ -2,4 +2,4 @@
 __pycache__
 dist/
 build/
-http_reporting_api/VERSION.txt
+lookout/VERSION.txt

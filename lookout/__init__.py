@@ -16,7 +16,7 @@ def package_version():
 
 	# pkg_resources
 	try:
-		return get_distribution('Django-HTTP-Reporting-API').version
+		return get_distribution('Django-Lookout').version
 	except DistributionNotFound:
 		# The package isn't installed
 		pass
