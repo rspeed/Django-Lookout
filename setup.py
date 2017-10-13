@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 class LazyReadmeConverter:
 	""" Uses pandoc to convert the README from Markdown to reStructuredText. """
 
-	IN_FORMAT = 'md'
+	IN_FORMAT = 'markdown_github'
 	OUT_FORMAT = 'rst'
 	converted = False
 
@@ -106,5 +106,5 @@ setup(
 		'Topic :: System :: Logging',
 		'Topic :: System :: Monitoring',
 	],
-	keywords='https csp hpkp error notification'
+	keywords='django csp hpkp security error-monitoring https'
 )
