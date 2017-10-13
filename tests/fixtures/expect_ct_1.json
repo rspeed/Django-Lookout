@@ -1,0 +1,18 @@
+{
+	"expect-ct-report": {
+		"date-time": "",
+		"hostname": "",
+		"port": "",
+		"effective-expiration-date": "",
+		"served-certificate-chain": [],
+		"validated-certificate-chain": [],
+		"scts": [
+			{
+				"version": "",
+				"status": "",
+				"source": "",
+				"serialized_sct": ""
+			}
+		]
+	}
+}

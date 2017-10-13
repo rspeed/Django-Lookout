@@ -1,0 +1,10 @@
+{
+	"date-time": "[date]",
+	"hostname": "[hostname]",
+	"port": "[port]",
+	"response-status": "[enum]",
+	"ocsp-response": "[OCSP response]",
+	"cert-status": "[enum]",
+	"served-certificate-chain": "[PEM encoded chain]",
+	"validated-certificate-chain": "[PEM encoded chain]"
+}
