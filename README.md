@@ -60,32 +60,6 @@ Run the database migrations:
 ./manage.py migrate lookout
 ```
 
-### Step 4
-
-Configure logging in `settings.py`.
-
-```python
-LOGGING = {
-	...
-	'handlers': {
-		...
-		'lookout_db': {
-			'class': 'lookout.logging.DatabaseLogHandler'
-		}
-	},
-	...
-	'loggers': {
-		...
-		'lookout': {
-			'handlers': ['lookout_db'],
-			'propagate': False
-		}
-	}
-}
-```
-
-The class `lookout.logging.DatabaseLogHandler` creates instances of `lookout.models.Report`. This will probably be getting replaced.
-
 
 ## Useful Guides
 

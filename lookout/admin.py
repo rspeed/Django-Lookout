@@ -30,21 +30,21 @@ def camel_to_label (camel_input):
 
 @admin.register(Report)
 class ReportAdmin(admin.ModelAdmin):
-	date_hierarchy = 'created'
+	date_hierarchy = 'created_time'
 
 	empty_value_display = '<i>[empty]</i>'
 
-	list_display = ['created', 'type']
-	list_filter = ['created', 'type', 'generated']
+	list_display = ['created_time', 'type']
+	list_filter = ['created_time', 'incident_time', 'type']
 
 	save_on_top = True
 	actions = None
 
 	fieldsets = [
 		[None, {
-			'fields': ['created', 'generated', 'url']
+			'fields': ['created_time', 'incident_time', 'type', 'url']
 		}],
-		["Body", {
+		["Details", {
 			'description': "The report's full contents.",
 			'fields': ['pretty_body'],
 		}]
@@ -53,8 +53,11 @@ class ReportAdmin(admin.ModelAdmin):
 
 	def get_readonly_fields (self, request, obj=None):
 		""" Marks all fields as read-only. """
-		fields = self.fields or [f.name for f in self.model._meta.fields]
-		return fields + ['pretty_body']
+		# Don't use self.get_fields, as that causes an infinite recursion
+		fields = self.fields or []
+		for fieldset in self.fieldsets or []:
+			fields.extend(fieldset[1].get('fields', []))
+		return fields
 
 
 	def has_add_permission (self, request):

@@ -1,12 +1,13 @@
 import logging
 
 from django.http import HttpResponse, HttpResponseBadRequest
-from django.views.generic import View
+from django.template.loader import get_template
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import View
 
+from .models import Report
 from .logging import ReportMessage
-from .schemas import ReportSchema
 from .exceptions import JSONDecodeError, UnknownSchemaError
 
 
@@ -29,7 +30,7 @@ class ReportView (View):
 		""" Handles the POST request. """
 
 		try:
-			reports = ReportSchema.from_json(request.body.decode('utf8'))
+			reports = Report.objects.create_from_json(request.body.decode('utf8'))
 
 			# Log the reports
 			for report in reports:
