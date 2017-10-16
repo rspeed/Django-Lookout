@@ -2,19 +2,26 @@ from os import path
 from setuptools import setup, find_packages
 
 
+# Root directory of the project
+project_dir = path.dirname(__file__)
 
-class LazyReadmeConverter:
-	""" Uses pandoc to convert the README from Markdown to reStructuredText. """
+
+# Dump the contents of README.md into a variable
+with open(path.join(path.abspath(project_dir), 'README.md'), encoding='utf-8') as f:
+	long_description = f.read()
+
+
+
+class LazyMarkdownConverter:
+	""" Lazily converts README from Markdown to reStructuredText using pandoc. """
 
 	IN_FORMAT = 'markdown_github'
 	OUT_FORMAT = 'rst'
-	converted = False
 
 
-	def __init__(self, file_path):
-		# Read the entire file contents into a string
-		with open(file_path, encoding='utf-8') as f:
-			self.value = f.read()
+	def __init__(self, value):
+		self.value = value
+		self.converted = False
 
 
 	def __str__(self):
@@ -23,7 +30,12 @@ class LazyReadmeConverter:
 		if not self.converted:
 			try:
 				from pypandoc import convert_text
-				self.value = convert_text(self.value, self.OUT_FORMAT, self.IN_FORMAT)
+				self.value = convert_text(
+					self.value,
+					self.OUT_FORMAT,
+					self.IN_FORMAT,
+					extra_args=['--columns=1000', '--wrap=none']
+				)
 			except ImportError:
 				print("pypandoc isn't installed")
 			except OSError:
@@ -51,10 +63,11 @@ class LazyReadmeConverter:
 setup(
 	name='Django-Lookout',
 
-	use_scm_version={'write_to': 'lookout/VERSION.txt'},
+	use_scm_version={'write_to': path.join(project_dir, 'lookout', 'VERSION.txt')},
 
 	description='API endpoint for receiving incident reports from Content Security Policy (CSP), HTTP Public Key Pinning (HPKP), and the HTTP Reporting API.',
-	long_description=LazyReadmeConverter(path.join(path.abspath(path.dirname(__file__)), 'README.md')),
+	long_description=LazyMarkdownConverter(long_description),
+	long_description_content_type='UTF-8',
 
 	url='https://github.com/rspeed/Django-Lookout',
 

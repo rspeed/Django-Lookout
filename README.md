@@ -105,32 +105,28 @@ No standards are currently supported across all major browsers, though it's hope
 
 |                                     | Chrome         | Edge                      | Firefox                  | Safari         |
 | ----------------------------------: | :------------- | :------------------------ | :----------------------- | :------------- |
-| **Content Security Policy (CSP)**   | Supported      | Supported ²               | Supported                | Supported ⁴    |
-| **HTTP Public Key Pinning (HPKP)**  | Supported ⁵    | Under Consideration ⁶     | Not Supported ⁷          | Not Supported  |
-| **Out-of-Band Reporting API**       | Planned ⁹      | Not Supported             | Not Supported            | Not Supported  |
-| **Network Error Logging (NEL)**     | Planned ¹³     | Under Consideration ¹⁴    | Not Supported            | Not Supported  |
-| **Expect-CT**                       | Planned ¹⁷     | Planned ¹⁸                | ?                        | ?              |
+| **Content Security Policy (CSP)**   | Supported      | [Supported][2]            | Supported                | [Supported][4] |
+| **HTTP Public Key Pinning (HPKP)**  | [Supported][5] | [Under Consideration][6]  | [Not Supported][7]       | Not Supported  |
+| **Out-of-Band Reporting API**       | [Planned][9]   | Not Supported             | Not Supported            | Not Supported  |
+| **Network Error Logging (NEL)**     | [Planned][13]  | [Under Consideration][14] | Not Supported            | Not Supported  |
+| **Expect-CT**                       | [Planned][17]  | [Planned][18]             | ?                        | ?              |
 | **Expect-Staple**                   | ?              | ?                         | ?                        | ?              |
 
 
-1. Source needed
-2. https://developer.microsoft.com/en-us/microsoft-edge/platform/status/contentsecuritypolicylevel2/
-3. Source needed
-4. https://webkit.org/status/#specification-content-security-policy-level-3
-5. https://www.chromestatus.com/feature/4669935557017600
-6. https://developer.microsoft.com/en-us/microsoft-edge/platform/status/publickeypinningextensionforhttp/
-7. https://bugzilla.mozilla.org/show_bug.cgi?id=1091176
-8. Source needed
-9. https://bugs.chromium.org/p/chromium/issues/detail?id=676016
-10. Source needed
-11. Source needed
-12. Source needed
-13. https://www.chromestatus.com/feature/5391249376804864
-14. https://developer.microsoft.com/en-us/microsoft-edge/platform/status/networkerrorlogging/
-15. Source needed
-16. Source needed
-17. https://bugs.chromium.org/p/chromium/issues/detail?id=679012
-18. https://lists.w3.org/Archives/Public/ietf-http-wg/2016OctDec/0767.html
+[2]: https://developer.microsoft.com/en-us/microsoft-edge/platform/status/contentsecuritypolicylevel2/ "Partial support for Level 3"
+[4]: https://webkit.org/status/#specification-content-security-policy-level-3 "Partial support for Level 3"
+
+[5]: https://www.chromestatus.com/feature/4669935557017600
+[6]: https://developer.microsoft.com/en-us/microsoft-edge/platform/status/publickeypinningextensionforhttp/ "Under Consideration"
+[7]: https://bugzilla.mozilla.org/show_bug.cgi?id=1091176 "No report-uri or report-only support."
+
+[9]: https://bugs.chromium.org/p/chromium/issues/detail?id=676016
+
+[13]: https://www.chromestatus.com/feature/5391249376804864 "No recent progress"
+[14]: https://developer.microsoft.com/en-us/microsoft-edge/platform/status/networkerrorlogging/
+
+[17]: https://bugs.chromium.org/p/chromium/issues/detail?id=679012
+[18]: https://lists.w3.org/Archives/Public/ietf-http-wg/2016OctDec/0767.html
 
 
 ## Tools and Similar Projects
