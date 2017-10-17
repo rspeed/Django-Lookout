@@ -1,3 +1,4 @@
+import subprocess
 from os import path
 from setuptools import setup, find_packages
 
@@ -6,57 +7,27 @@ from setuptools import setup, find_packages
 project_dir = path.dirname(__file__)
 
 
-# Dump the contents of README.md into a variable
-with open(path.join(path.abspath(project_dir), 'README.md'), encoding='utf-8') as f:
-	long_description = f.read()
+# Use pandoc to convert README.md to reStructuredText
+try:
+	pandoc = subprocess.run(
+		[
+			'pandoc',
+			'--from=markdown_github',
+			'--to=rst',
+			'--columns=1000',
+			'--wrap=none',
+			path.join(path.abspath(project_dir), 'README.md')
+		],
+		stdout=subprocess.PIPE,
+		check=True
+	)
 
+except (OSError, subprocess.CalledProcessError):
+	print("pandoc isn't available")
+	long_description = ''
 
-
-class LazyMarkdownConverter:
-	""" Lazily converts README from Markdown to reStructuredText using pandoc. """
-
-	IN_FORMAT = 'markdown_github'
-	OUT_FORMAT = 'rst'
-
-
-	def __init__(self, value):
-		self.value = value
-		self.converted = False
-
-
-	def __str__(self):
-		""" Performs the conversion and caches the result. """
-
-		if not self.converted:
-			try:
-				from pypandoc import convert_text
-				self.value = convert_text(
-					self.value,
-					self.OUT_FORMAT,
-					self.IN_FORMAT,
-					extra_args=['--columns=1000', '--wrap=none']
-				)
-			except ImportError:
-				print("pypandoc isn't installed")
-			except OSError:
-				print("pandoc isn't available")
-			finally:
-				# No need to try more than once
-				self.converted = True
-
-		return self.value
-
-
-	def __getattr__ (self, name):
-		""" Wraps the converted value. """
-
-		return getattr(str(self), name)
-
-
-	def __repr__(self):
-		""" Manually overloaded because it's special-cased by builtins. """
-
-		return repr(str(self))
+else:
+	long_description = pandoc.stdout.decode('utf-8')
 
 
 
@@ -66,7 +37,7 @@ setup(
 	use_scm_version={'write_to': path.join(project_dir, 'lookout', 'VERSION.txt')},
 
 	description='API endpoint for receiving incident reports from Content Security Policy (CSP), HTTP Public Key Pinning (HPKP), and the HTTP Reporting API.',
-	long_description=LazyMarkdownConverter(long_description),
+	long_description=long_description,
 	long_description_content_type='UTF-8',
 
 	url='https://github.com/rspeed/Django-Lookout',
@@ -91,7 +62,6 @@ setup(
 	],
 	setup_requires=[
 		'setuptools_scm',
-		'pypandoc'
 	],
 	extras_require={
 	},
