@@ -62,6 +62,7 @@ setup(
 	],
 	setup_requires=[
 		'setuptools_scm',
+		'wheel'
 	],
 	extras_require={
 	},
