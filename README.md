@@ -1,6 +1,8 @@
 Django Lookout
 ==============
 
+[![Build Status](https://travis-ci.org/rspeed/Django-Lookout.svg?branch=master)](https://travis-ci.org/rspeed/Django-Lookout)
+
 ![Django Lookout logo: a lookout tower](./lookout/docs/logo.svg)
 
 A Django-based API endpoint for collecting and processing automatic incident reports send by your visitors' web browsers. Currently that includes both [Content Security Policy](https://en.wikipedia.org/wiki/Content_Security_Policy) (CSP) and [HTTP Public Key Pinning](https://en.wikipedia.org/wiki/HTTP_Public_Key_Pinning) (HPKP), but support for additional report types is planned.
