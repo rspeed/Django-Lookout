@@ -6,7 +6,7 @@ __all__ = ['ReportMessage']
 class ReportMessage:
 	""" Log message that can contain unserialized report data to be passed to specialized log handlers. """
 
-	msg = "Django HTTP Reporting"
+	msg = "Django-Lookout"
 	report = None
 
 
