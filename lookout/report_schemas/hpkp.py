@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from django.utils import timezone, dateparse
 
 from .generic import GenericReportSchema
@@ -87,7 +89,7 @@ class LegacyHPKPReportSchema (LegacyReportSchema):
 		""" Adapts the legacy HPKP schema to the HTTP Reporting API schema """
 
 		# The number of milliseconds between ``date-time`` and now
-		age = (timezone.now() - dateparse.parse_datetime(report_data.pop('date-time'))).microseconds // 1000
+		age = (timezone.now() - dateparse.parse_datetime(report_data.pop('date-time'))) / timedelta(milliseconds=1)
 
 		return cls.generic_class, {
 			'type': cls.type,
