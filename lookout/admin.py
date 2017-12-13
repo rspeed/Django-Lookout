@@ -1,16 +1,18 @@
 import re
+import typing
 
 from django.contrib import admin
+from django.http import HttpRequest
 
 from .models import Report
 
 
 
-def camel_to_label (camel_input):
+def camel_to_label (camel_input: str) -> str:
 	""" Converts a camel-case string into a space-delimited label. """
 
 	# Handles capitalization logic
-	def capitalization (word, index):
+	def capitalization (word: str, index: int) -> str:
 		# Keep acronyms upper-case
 		if word.isupper():
 			return word
@@ -51,7 +53,7 @@ class ReportAdmin(admin.ModelAdmin):
 	]
 
 
-	def get_readonly_fields (self, request, obj=None):
+	def get_readonly_fields (self, request: HttpRequest, obj=None) -> typing.List[str]:
 		""" Marks all fields as read-only. """
 		# Don't use self.get_fields, as that causes an infinite recursion
 		fields = self.fields or []

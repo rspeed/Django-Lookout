@@ -1,9 +1,10 @@
+import typing
 from pkg_resources import get_distribution, DistributionNotFound
 from os import path
 
 
 
-def package_version():
+def package_version() -> typing.Optional[str]:
 	""" Attempts to determine the package's version. """
 
 	# VERSION.txt

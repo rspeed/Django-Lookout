@@ -1,4 +1,5 @@
 import logging
+import typing
 import json
 import uuid
 
@@ -24,7 +25,7 @@ __all__ = ['Report']
 
 
 class ReportManager (models.Manager):
-	def create_from_json (self, report_json):
+	def create_from_json (self, report_json: str) -> typing.Iterator[models.Model]:
 		""" Converts JSON data into a list of Report instances. """
 
 		logger.debug("Decoding JSON")
@@ -78,7 +79,7 @@ class Report (models.Model):
 		ordering = ['-incident_time']
 
 
-	def pretty_body (self):
+	def pretty_body (self) -> str:
 		""" Displays a nicely-formatted version of a the report's body. """
 		response = highlight(
 			# Reformat the JSON to add whitespace

@@ -1,6 +1,6 @@
 import logging
 
-from django.http import HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponse, HttpResponseBadRequest, HttpRequest
 from django.template.loader import get_template
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
@@ -26,7 +26,7 @@ class ReportView (View):
 
 
 	@staticmethod
-	def post(request):
+	def post(request: HttpRequest) -> HttpResponse:
 		""" Handles the POST request. """
 
 		try:
