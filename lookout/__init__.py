@@ -27,4 +27,4 @@ def package_version() -> typing.Optional[str]:
 
 __version__ = package_version()
 
-default_app_config = '{}.apps.ReportURIConfig'.format(__name__)
+default_app_config = '{}.apps.DjangoLookoutConfig'.format(__name__)

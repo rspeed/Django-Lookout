@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class ReportURIConfig(AppConfig):
+class DjangoLookoutConfig(AppConfig):
 	name = 'lookout'
 	verbose_name = "Django Lookout"
