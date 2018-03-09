@@ -6,9 +6,12 @@ from django.test import Client, TestCase
 
 
 class HttpApiTestCase (TestCase):
-	""" Tests reporting via the HTTP API endpoint. """
+	"""
+	Tests reporting via the HTTP API endpoint.
 
-	# TODO add invalid reports
+	.. todo:: Add invalid reports
+	"""
+
 	fixture_files = [
 		'hpkp_1.json',
 		'csp_1.json',
