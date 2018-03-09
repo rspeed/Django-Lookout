@@ -14,7 +14,7 @@ from pygments import highlight
 from pygments.lexers.data import JsonLexer
 from pygments.formatters.html import HtmlFormatter
 
-from .report_schemas import get_matching_schema, report_schema_registry
+from .report_schemas import ReportSchema, get_matching_schema, report_schema_registry
 
 
 logger = logging.getLogger(__name__)
@@ -92,7 +92,7 @@ class Report (models.Model):
 
 
 	@property
-	def schema (self):
+	def schema (self) -> ReportSchema:
 		return report_schema_registry.get(self.type)
 
 

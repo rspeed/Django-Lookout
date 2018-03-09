@@ -1,3 +1,5 @@
+""" Utilities for Django Lookout """
+
 
 
 class attribute (property):
