@@ -13,7 +13,7 @@ setup(
 	},
 
 	install_requires=[
-		'Django<2>=1.10',
+		'Django>=1.10',
 		'Pygments<3>=2.2',
 		'jsonschema<3>=2.6.0',
 		'pytz>=2017.2'
