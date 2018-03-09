@@ -4,7 +4,6 @@
 
 
 if __name__ == '__main__':
-	os.environ['DJANGO_SETTINGS_MODULE'] = 'lookout.tests.test_settings'
 	import os
 	import sys
 
@@ -13,6 +12,7 @@ if __name__ == '__main__':
 	from django.test.utils import get_runner
 
 
+	os.environ['DJANGO_SETTINGS_MODULE'] = 'lookout.tests.settings'
 	django.setup()
 
 	# Get the test runner class based on the settings
