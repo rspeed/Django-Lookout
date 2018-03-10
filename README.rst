@@ -1,15 +1,21 @@
-Django Lookout
-==============
+|logo| Django Lookout
+=====================
 
-|build status|
-
-|logo|
-
-.. |build status| image:: https://travis-ci.org/rspeed/Django-Lookout.svg?branch=master
-		:alt: Build Status
-		:target: https://travis-ci.org/rspeed/Django-Lookout
 .. |logo| image:: https://github.com/rspeed/Django-Lookout/raw/master/lookout/docs/logo.svg?sanitize=true
 		:alt: Django Lookout logo: a lookout tower
+		:height: 1em
+		:width: .6em
+
+|build status| |coverage|
+
+.. |build status| image:: https://img.shields.io/travis/rspeed/Django-Lookout.svg
+		:alt: Build Status
+		:target: https://travis-ci.org/rspeed/Django-Lookout
+		:height: 20px
+.. |coverage| image:: https://img.shields.io/coveralls/github/rspeed/Django-Lookout.svg
+		:alt: Test Coverage
+		:target: https://coveralls.io/github/rspeed/Django-Lookout
+		:height: 20px
 
 Django Lookout is an API endpoint for collecting and processing automatic incident reports send by your visitors' web browsers. Currently that includes both `Content Security Policy <https://en.wikipedia.org/wiki/Content_Security_Policy>`__ (CSP) and `HTTP Public Key Pinning <https://en.wikipedia.org/wiki/HTTP_Public_Key_Pinning>`__ (HPKP), but support for additional report types is planned.
 
