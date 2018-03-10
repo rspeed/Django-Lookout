@@ -11,6 +11,10 @@ env:
 
 install:
   - pip install -q Django==$DJANGO_VERSION
-  - python setup.py -q install
+  - pip install -q -e ".[dev]" --upgrade-strategy only-if-needed
 
-script: python runtests.py
+script:
+  - coverage run --source=. runtests.py
+
+after_success:
+  - codecov
