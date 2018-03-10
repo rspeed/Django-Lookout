@@ -28,7 +28,7 @@ It's important to note that Django Lookout only handles the *reporting* part of 
 Install and Configure
 ---------------------
 
-.. warning::  If you're using HPKP, Django Lookout *must* be set up on a different domain name.
+.. warning::  If you're using HPKP, Django Lookout *must* be set up `on a different domain name <https://developers.google.com/web/updates/2015/09/HPKP-reporting-with-chrome-46#one_last_gotcha>`_.
 
 
 Step 1
