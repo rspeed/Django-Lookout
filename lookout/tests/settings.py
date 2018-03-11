@@ -1,7 +1,7 @@
-
 """ Django settings for running tests with the standalone app Django-Lookout. """
 
 import tempfile
+
 
 
 ROOT_URLCONF = 'lookout.tests.urls'
@@ -25,8 +25,7 @@ INSTALLED_APPS = (
 	'django.contrib.sessions',
 	'django.contrib.auth',
 	'django.contrib.staticfiles',
-	'lookout',
-	'lookout.tests',
+	'lookout'
 )
 
 MIDDLEWARE_CLASSES = (
