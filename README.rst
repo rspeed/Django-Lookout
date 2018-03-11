@@ -1,7 +1,7 @@
 |logo| Django Lookout
 =====================
 
-.. |logo| image:: https://github.com/rspeed/Django-Lookout/raw/master/lookout/docs/logo.svg?sanitize=true
+.. |logo| image:: https://github.com/rspeed/Django-Lookout/raw/master/docs/logo.svg?sanitize=true
 		:alt: Django Lookout logo: a lookout tower
 		:height: 1em
 		:width: .6em
@@ -168,7 +168,7 @@ Tools and Similar Projects
 ..  [#fhpkp] `No support for report-uri <https://bugzilla.mozilla.org/show_bug.cgi?id=1091176>`__
 ..  [#ehpkp] `Under consideration <https://developer.microsoft.com/en-us/microsoft-edge/platform/status/publickeypinningextensionforhttp/>`__
 
-..  [#cgapi] `In development <https://bugs.chromium.org/p/chromium/issues/detail?id=676016>`__
+..  [#cgapi] `Complete, but not yet in a production release <https://bugs.chromium.org/p/chromium/issues/detail?id=676016>`__
 ..  [#cnel] `In development <https://www.chromestatus.com/feature/5391249376804864>`__
 
 ..  [#enel] `Under consideration <https://developer.microsoft.com/en-us/microsoft-edge/platform/status/networkerrorlogging/>`__
