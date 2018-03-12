@@ -12,6 +12,10 @@ class GenericReportSchema (ReportSchema):
 
 	@classproperty
 	def body_schema (cls):
+		"""
+		A class attribute containing the sub-schema for the report type's ``body`` property.
+		The HTTP Reporting API standardized the root schema of reports, with each type differing only in the value of ``type`` and the structure of ``body``.
+		"""
 		raise NotImplementedError()
 
 

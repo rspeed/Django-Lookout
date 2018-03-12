@@ -10,6 +10,6 @@ class FallbackReportSchema (GenericReportSchema):
 
 	type = 'misc'
 	name = "Unknown Incident Report"
-	description = ""
+	description = "An incident report which didn't match any of the known schemas."
 
 	schema = {'type': 'object'}

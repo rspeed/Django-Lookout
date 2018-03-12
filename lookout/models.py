@@ -25,6 +25,8 @@ __all__ = ['Report']
 
 
 class ReportManager (models.Manager):
+	""" Manager for the Report model. """
+
 	def create_from_json (self, report_json: str) -> typing.Iterator[models.Model]:
 		""" Converts JSON data into a list of Report instances. """
 
