@@ -52,9 +52,9 @@ class ReportManager (models.Manager):
 			yield self.create(
 				created_time=now,
 				# Use the report's `age` property to determine when the incident occurred
-				incident_time=now - timedelta(milliseconds=report_data['age']),
+				incident_time=now - timedelta(milliseconds=report_data.get('age', 0)),
 				type=schema.type,
-				url=report_data['url'],
+				url=report_data.get('url', None),
 				body=json.dumps(report_data)
 			)
 
@@ -71,7 +71,7 @@ class Report (models.Model):
 	created_time = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name="Submission Time", help_text="When the incident report was submitted.")
 	incident_time = models.DateTimeField(db_index=True, help_text="When the incident occurred.")
 	type = models.CharField(max_length=120, db_index=True, choices=report_types, help_text="The report's category.")
-	url = models.URLField(help_text="The address of the document or worker from which the report was generated.")
+	url = models.URLField(null=True, help_text="The address of the document or worker from which the report was generated.")
 	body = models.TextField(help_text="The contents of the incident report.")
 
 
