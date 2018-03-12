@@ -11,11 +11,9 @@
 .. |build status| image:: https://img.shields.io/travis/rspeed/Django-Lookout.svg
 		:alt: Build Status
 		:target: https://travis-ci.org/rspeed/Django-Lookout
-		:height: 20px
-.. |coverage| image:: https://img.shields.io/coveralls/github/rspeed/Django-Lookout.svg
+.. |coverage| image:: https://img.shields.io/codecov/c/gh/rspeed/Django-Lookout.svg
 		:alt: Test Coverage
-		:target: https://coveralls.io/github/rspeed/Django-Lookout
-		:height: 20px
+		:target: https://codecov.io/gh/rspeed/Django-Lookout
 
 Django Lookout is an API endpoint for collecting and processing automatic incident reports send by your visitors' web browsers. Currently that includes both `Content Security Policy <https://en.wikipedia.org/wiki/Content_Security_Policy>`__ (CSP) and `HTTP Public Key Pinning <https://en.wikipedia.org/wiki/HTTP_Public_Key_Pinning>`__ (HPKP), but support for additional report types is planned.
 
@@ -85,7 +83,7 @@ Standards
 Currently Supported
 ~~~~~~~~~~~~~~~~~~~
 
-`Out-of-Band Reporting API <https://wicg.github.io/reporting/>`__
+`Reporting API <https://wicg.github.io/reporting/>`__
 	A generic incident reporting API that can be used by all of the following standards. Django Lookout automatically converts reports using "legacy" schemas to the generic schema.
 
 `Content Security Policy <https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP>`__
@@ -113,7 +111,7 @@ These standards are planned to be supported in Django Lookout 1.0:
 Browser Implementation Status
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The only standard currently supported across all major browsers is Content Security Policy. It's hoped that the generic Out-of-Band Reporting API will significantly improve the situation in the future.
+The only standard currently supported across all major browsers is Content Security Policy. It's hoped that the generic Reporting API will significantly improve the situation in the future.
 
 .. note:: This table only considers a feature supported if it includes reporting functionality.
 .. note:: Internet Explorer is excluded due to the fact that it doesn't support any of these features via standard headers.
@@ -123,7 +121,7 @@ Standard                            Chrome                   Firefox            
 ==================================  =======================  =======================  =======================  ==================
 **Content Security Policy (CSP)**   Supported                Supported                Supported [#ecsp]_       Supported [#scsp]_
 **HTTP Public Key Pinning (HPKP)**  Supported [#chpkp]_      Not Supported [#fhpkp]_  Not Supported [#ehpkp]_  Not Supported
-**Out-of-Band Reporting API**       Not Supported [#cgapi]_  Not Supported            Not Supported            Not Supported
+**Reporting API**                   Not Supported [#cgapi]_  Not Supported            Not Supported            Not Supported
 **Network Error Logging (NEL)**     Not Supported [#cnel]_   Not Supported            Not Supported [#enel]_   Not Supported
 **Expect-CT**                       Supported [#cect]_       Not Supported [#fect]_   ?                        ?
 **Expect-Staple**                   ?                        ?                        ?                        ?
