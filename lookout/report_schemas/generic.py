@@ -1,4 +1,4 @@
-from ..utils import attribute
+from ..utils import classproperty
 from .base import ReportSchema
 
 
@@ -10,14 +10,12 @@ class GenericReportSchema (ReportSchema):
 		abstract = True
 
 
-	@attribute
-	@classmethod
+	@classproperty
 	def body_schema (cls):
-		return NotImplementedError
+		raise NotImplementedError()
 
 
-	@attribute
-	@classmethod
+	@classproperty
 	def schema (cls):
 		return {
 			'$schema': "http://json-schema.org/draft-04/schema#",

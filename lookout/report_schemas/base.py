@@ -2,7 +2,7 @@ from logging import getLogger
 from collections import OrderedDict
 import jsonschema
 
-from ..utils import attribute
+from ..utils import classproperty
 from ..exceptions import UnknownSchemaError
 
 
@@ -59,29 +59,25 @@ class ReportSchema (metaclass=ReportSchemaBase):
 		abstract = True
 
 
-	@attribute
-	@classmethod
+	@classproperty
 	def schema (cls):
 		""" A dictionary representing the JSON schema of a certain type of incident report. """
-		return NotImplementedError
+		raise NotImplementedError()
 
 
-	@attribute
-	@classmethod
+	@classproperty
 	def type (cls):
-		return NotImplementedError
+		raise NotImplementedError()
 
 
-	@attribute
-	@classmethod
+	@classproperty
 	def name (cls):
-		return NotImplementedError
+		raise NotImplementedError()
 
 
-	@attribute
-	@classmethod
+	@classproperty
 	def description (cls):
-		return NotImplementedError
+		raise NotImplementedError()
 
 
 	@classmethod

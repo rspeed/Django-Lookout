@@ -1,4 +1,4 @@
-from ..utils import attribute
+from ..utils import classproperty
 from .base import ReportSchema
 
 
@@ -10,8 +10,7 @@ class LegacyReportSchema (ReportSchema):
 		abstract = True
 
 
-	@attribute
-	@classmethod
+	@classproperty
 	def generic_class (cls):
 		return NotImplementedError
 
@@ -20,32 +19,27 @@ class LegacyReportSchema (ReportSchema):
 	root_object_name = None
 
 
-	@attribute
-	@classmethod
+	@classproperty
 	def type (cls):
 		return 'legacy_{}'.format(cls.generic_class.type)
 
 
-	@attribute
-	@classmethod
+	@classproperty
 	def name (cls):
 		return "Legacy {}".format(cls.generic_class.name)
 
 
-	@attribute
-	@classmethod
+	@classproperty
 	def description (cls):
 		return "Legacy {}".format(cls.generic_class.description)
 
 
-	@attribute
-	@classmethod
+	@classproperty
 	def body_schema (cls):
 		return cls.generic_class.body_schema
 
 
-	@attribute
-	@classmethod
+	@classproperty
 	def schema (cls):
 		schema_object = {
 			'$schema': 'http://json-schema.org/draft-04/schema#',
