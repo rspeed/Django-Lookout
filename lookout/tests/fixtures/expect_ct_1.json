@@ -1,17 +1,21 @@
 {
 	"expect-ct-report": {
-		"date-time": "",
-		"hostname": "",
-		"port": "",
-		"effective-expiration-date": "",
-		"served-certificate-chain": [],
-		"validated-certificate-chain": [],
+		"date-time": "2018-03-12T05:55:12Z",
+		"hostname": "www.example.com",
+		"port": "443",
+		"effective-expiration-date": "2019-01-01T05:55:12Z",
+		"served-certificate-chain": [
+			"-----BEGIN CERTIFICATE-----\nMIIEBDCCAuygAwIBAgIDAjppMA0GCSqGSIb3DQEBBQUAMEIxCzAJBgNVBAYTAlVT\nHFa9llF7b1cq26KqltyMdMKVvvBulRP/F/A8rLIQjcxz++iPAsbw+zOzlTvjwsto\nWHPbqCRiOwY1nQ2pM714A5AuTHhdUDqB1O6gyHA43LL5Z/qHQF1hwFGPa4NrzQU6\nyuGnBXj8ytqU0CwIPX4WecigUCAkVDNx\n-----END CERTIFICATE-----"
+		],
+		"validated-certificate-chain": [
+			"-----BEGIN CERTIFICATE-----\nMIIEBDCCAuygAwIBAgIDAjppMA0GCSqGSIb3DQEBBQUAMEIxCzAJBgNVBAYTAlVT\nHFa9llF7b1cq26KqltyMdMKVvvBulRP/F/A8rLIQjcxz++iPAsbw+zOzlTvjwsto\nWHPbqCRiOwY1nQ2pM714A5AuTHhdUDqB1O6gyHA43LL5Z/qHQF1hwFGPa4NrzQU6\nyuGnBXj8ytqU0CwIPX4WecigUCAkVDNx\n-----END CERTIFICATE-----"
+		],
 		"scts": [
 			{
-				"version": "",
-				"status": "",
-				"source": "",
-				"serialized_sct": ""
+				"version": 2,
+				"status": "unknown",
+				"source": "tls-extension",
+				"serialized_sct": "yeah"
 			}
 		]
 	}

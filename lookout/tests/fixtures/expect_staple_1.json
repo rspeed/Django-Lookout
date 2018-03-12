@@ -1,10 +1,14 @@
 {
-	"date-time": "[date]",
-	"hostname": "[hostname]",
-	"port": "[port]",
-	"response-status": "[enum]",
-	"ocsp-response": "[OCSP response]",
-	"cert-status": "[enum]",
-	"served-certificate-chain": "[PEM encoded chain]",
-	"validated-certificate-chain": "[PEM encoded chain]"
+	"date-time": "2017-03-12T05:55:12Z",
+	"hostname": "www.example.com",
+	"port": "443",
+	"response-status": "PROVIDED",
+	"ocsp-response": "some pem-encoded data",
+	"cert-status": "GOOD",
+	"served-certificate-chain": [
+		"-----BEGIN CERTIFICATE-----\nMIIEBDCCAuygAwIBAgIDAjppMA0GCSqGSIb3DQEBBQUAMEIxCzAJBgNVBAYTAlVT\nHFa9llF7b1cq26KqltyMdMKVvvBulRP/F/A8rLIQjcxz++iPAsbw+zOzlTvjwsto\nWHPbqCRiOwY1nQ2pM714A5AuTHhdUDqB1O6gyHA43LL5Z/qHQF1hwFGPa4NrzQU6\nyuGnBXj8ytqU0CwIPX4WecigUCAkVDNx\n-----END CERTIFICATE-----"
+	],
+	"validated-certificate-chain": [
+		"-----BEGIN CERTIFICATE-----\nMIIEBDCCAuygAwIBAgIDAjppMA0GCSqGSIb3DQEBBQUAMEIxCzAJBgNVBAYTAlVT\nHFa9llF7b1cq26KqltyMdMKVvvBulRP/F/A8rLIQjcxz++iPAsbw+zOzlTvjwsto\nWHPbqCRiOwY1nQ2pM714A5AuTHhdUDqB1O6gyHA43LL5Z/qHQF1hwFGPa4NrzQU6\nyuGnBXj8ytqU0CwIPX4WecigUCAkVDNx\n-----END CERTIFICATE-----"
+	]
 }
