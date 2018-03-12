@@ -3,7 +3,7 @@ from collections import Mapping
 from django.apps import AppConfig
 from django.conf import settings as project_settings
 from django.core.exceptions import ImproperlyConfigured
-from django.core.checks import Error, Warning, register as register_check
+from django.core.checks import Warning, register as register_check
 
 
 
@@ -29,7 +29,7 @@ class DjangoLookoutConfig(AppConfig):
 			assert(isinstance(settings, Mapping))
 
 		except AssertionError:
-			checks.append(Error("{0!r} must be a dictionary-like object.".format(self.name.upper())))
+			raise ImproperlyConfigured("The {0!r} setting must be a dictionary-like object.".format(self.name.upper()))
 
 		except AttributeError:
 			# No settings dictionary
