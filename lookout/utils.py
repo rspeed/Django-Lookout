@@ -10,7 +10,7 @@ class classproperty:
 	Due to limitations of class attributes, only the getter is easily implemented.
 	"""
 
-	fget: Union[staticmethod, classmethod] = None
+	fget = None
 	""" The wrapped getter function. """
 
 
