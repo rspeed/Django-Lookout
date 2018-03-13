@@ -92,28 +92,54 @@ class MockRequest:
 		self.user = MockSuperUser()
 
 
-request = MockRequest()
-
-
 class TestAdmin (TestCase):
+	""" Ensures that the admin behaves as expected. """
 	fixtures = ['model_tests/reports']
 
 	ALL_FIELDS = ['body', 'created_time', 'incident_time', 'type', 'url', 'pretty_body']
 	DISPLAY_FIELDS = ['created_time', 'incident_time', 'type', 'url', 'pretty_body']
 
-	def test_admin_report_fields (self):
-		admin = ReportAdmin(Report, AdminSite())
+
+	def setUp (self):
+		self.request = MockRequest()
+
+		self.admin = ReportAdmin(Report, AdminSite())
 
 		# Grab the first Report object
-		report = Report.objects.first()
+		self.report = Report.objects.first()
 
+
+	def test_fields (self):
 		# All fields are assigned to fieldsets
-		self.assertEqual(list(admin.get_form(request).base_fields), [])
+		self.assertEqual(list(self.admin.get_form(self.request).base_fields), [])
 
-		self.assertEqual(list(admin.get_fields(request)), self.ALL_FIELDS)
-		self.assertEqual(list(admin.get_fields(request, report)), self.ALL_FIELDS)
+		self.assertEqual(list(self.admin.get_fields(self.request)), self.ALL_FIELDS)
+		self.assertEqual(list(self.admin.get_fields(self.request, self.report)), self.ALL_FIELDS)
 
+
+	def test_readonly_fields (self):
 		# All fields should be marked as readonly
-		self.assertEqual(list(admin.get_readonly_fields(request, report)), self.DISPLAY_FIELDS)
+		self.assertEqual(list(self.admin.get_readonly_fields(self.request, self.report)), self.DISPLAY_FIELDS)
 
-		self.assertIsNone(admin.get_exclude(request, report))
+		# No excluded fields
+		self.assertIsNone(self.admin.get_exclude(self.request, self.report))
+
+
+	def test_readonly_post (self):
+		self.request.method = 'POST'
+
+		# All admin functions should be read-only, even for a superuser
+		self.assertFalse(self.admin.has_add_permission(self.request))
+		self.assertFalse(self.admin.has_change_permission(self.request))
+		self.assertFalse(self.admin.has_delete_permission(self.request))
+
+
+	def test_readonly_get (self):
+		self.request.method = 'GET'
+
+		# Should be True when the request method is GET, which allows the form to be displayed
+		self.assertTrue(self.admin.has_change_permission(self.request))
+
+		# But the rest should still be False
+		self.assertFalse(self.admin.has_add_permission(self.request))
+		self.assertFalse(self.admin.has_delete_permission(self.request))
