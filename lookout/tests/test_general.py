@@ -2,9 +2,13 @@ import re
 from pkg_resources import parse_version
 
 from django.test import TestCase
+from django.contrib.admin.sites import AdminSite
+from django.apps import apps
 from django.core.checks import Warning
 
 import lookout
+from lookout.admin import ReportAdmin
+from lookout.models import Report
 
 
 
@@ -73,3 +77,43 @@ class TestConfigWarnings (TestCase):
 			)
 		]
 		self.assertEqual(app.checks, expected_warnings)
+
+
+
+class MockSuperUser:
+	""" Pretends to be a user with all permissions. """
+	def has_perm(self, perm):
+		return True
+
+
+class MockRequest:
+	""" Pretends to be a Request performed by a superuser. """
+	def __init__(self):
+		self.user = MockSuperUser()
+
+
+request = MockRequest()
+
+
+class TestAdmin (TestCase):
+	fixtures = ['model_tests/reports']
+
+	ALL_FIELDS = ['body', 'created_time', 'incident_time', 'type', 'url', 'pretty_body']
+	DISPLAY_FIELDS = ['created_time', 'incident_time', 'type', 'url', 'pretty_body']
+
+	def test_admin_report_fields (self):
+		admin = ReportAdmin(Report, AdminSite())
+
+		# Grab the first Report object
+		report = Report.objects.first()
+
+		# All fields are assigned to fieldsets
+		self.assertEqual(list(admin.get_form(request).base_fields), [])
+
+		self.assertEqual(list(admin.get_fields(request)), self.ALL_FIELDS)
+		self.assertEqual(list(admin.get_fields(request, report)), self.ALL_FIELDS)
+
+		# All fields should be marked as readonly
+		self.assertEqual(list(admin.get_readonly_fields(request, report)), self.DISPLAY_FIELDS)
+
+		self.assertIsNone(admin.get_exclude(request, report))
