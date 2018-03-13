@@ -1,0 +1,57 @@
+[
+	{
+		"model": "lookout.report",
+		"pk": "15194bb4-ced5-49fa-ac46-39881e6a86a2",
+		"fields": {
+			"created_time": "2018-03-13T07:49:45.186Z",
+			"incident_time": "2018-03-13T07:49:45.186Z",
+			"type": "csp",
+			"url": "http://example.com/signup.html",
+			"body": "{\"type\": \"csp\", \"age\": 0, \"url\": \"http://example.com/signup.html\", \"body\": {\"referrer\": \"\", \"disposition\": \"report\", \"blocked\": \"http://example.com/css/style.css\", \"directive\": \"style-src cdn.example.com\", \"policy\": \"default-src 'none'; style-src cdn.example.com; report-uri /_/csp-reports\"}}"
+		}
+	},
+	{
+		"model": "lookout.report",
+		"pk": "2e3d0268-4a01-4a01-9b20-3bb225e86391",
+		"fields": {
+			"created_time": "2018-03-13T07:51:34.456Z",
+			"incident_time": "2018-03-13T07:51:34.446Z",
+			"type": "csp",
+			"url": "https://example.com/vulnerable-page/",
+			"body": "{\"type\": \"csp\", \"age\": 10, \"url\": \"https://example.com/vulnerable-page/\", \"body\": {\"blocked\": \"https://evil.com/evil.js\", \"directive\": \"script-src\", \"policy\": \"script-src 'self'; object-src 'none'\", \"status\": 200, \"referrer\": \"https://evil.com/\"}}"
+		}
+	},
+	{
+		"model": "lookout.report",
+		"pk": "3ad05263-fa42-4a80-b4fc-a910b4960a57",
+		"fields": {
+			"created_time": "2018-03-13T07:51:34.488Z",
+			"incident_time": "2018-03-13T07:51:34.458Z",
+			"type": "misc",
+			"url": "https://example.com/thing.js",
+			"body": "{\"type\": \"nel\", \"age\": 29, \"url\": \"https://example.com/thing.js\", \"body\": {\"referrer\": \"https://www.example.com/\", \"server-ip\": \"234.233.232.231\", \"protocol\": \"\", \"status-code\": 0, \"elapsed-time\": 143, \"age\": 0, \"type\": \"http.dns.name_not_resolved\"}}"
+		}
+	},
+	{
+		"model": "lookout.report",
+		"pk": "52fd1cf4-3e58-4294-a88a-54eba98e1431",
+		"fields": {
+			"created_time": "2018-03-13T07:51:34.472Z",
+			"incident_time": "2018-03-13T07:51:34.439Z",
+			"type": "hpkp",
+			"url": "https://www.example.com/",
+			"body": "{\"type\": \"hpkp\", \"age\": 32, \"url\": \"https://www.example.com/\", \"body\": {\"date-time\": \"2014-04-06T13:00:50Z\", \"hostname\": \"www.example.com\", \"port\": 443, \"effective-expiration-date\": \"2014-05-01T12:40:50Z\", \"include-subdomains\": false, \"served-certificate-chain\": [\"-----BEGIN CERTIFICATE-----\\nMIIEBDCCAuygAwIBAgIDAjppMA0GCSqGSIb3DQEBBQUAMEIxCzAJBgNVBAYTAlVT\\nHFa9llF7b1cq26KqltyMdMKVvvBulRP/F/A8rLIQjcxz++iPAsbw+zOzlTvjwsto\\nWHPbqCRiOwY1nQ2pM714A5AuTHhdUDqB1O6gyHA43LL5Z/qHQF1hwFGPa4NrzQU6\\nyuGnBXj8ytqU0CwIPX4WecigUCAkVDNx\\n-----END CERTIFICATE-----\", \"-----BEGIN CERTIFICATE-----\\nMIIEBDCCAuygAwIBAgIDAjppMA0GCSqGSIb3DQEBBQUAMEIxCzAJBgNVBAYTAlVT\\nHFa9llF7b1cq26KqltyMdMKVvvBulRP/F/A8rLIQjcxz++iPAsbw+zOzlTvjwsto\\nWHPbqCRiOwY1nQ2pM714A5AuTHhdUDqB1O6gyHA43LL5Z/qHQF1hwFGPa4NrzQU6\\nyuGnBXj8ytqU0CwIPX4WecigUCAkVDNx\\n-----END CERTIFICATE-----\"]}}"
+		}
+	},
+	{
+		"model": "lookout.report",
+		"pk": "7abb2e4f-c26c-4753-b80a-4b0bf69be2ec",
+		"fields": {
+			"created_time": "2018-03-13T07:51:17.734Z",
+			"incident_time": "2014-04-06T13:00:50.000Z",
+			"type": "hpkp",
+			"url": "https://www.example.com/",
+			"body": "{\"type\": \"legacy_hpkp\", \"age\": 124138227733.506, \"url\": \"https://www.example.com/\", \"body\": {\"hostname\": \"www.example.com\", \"port\": 443, \"effective-expiration-date\": \"2014-05-01T12:40:50Z\", \"include-subdomains\": false, \"served-certificate-chain\": [\"-----BEGIN CERTIFICATE-----\\nMIIEBDCCAuygAwIBAgIDAjppMA0GCSqGSIb3DQEBBQUAMEIxCzAJBgNVBAYTAlVT\\nHFa9llF7b1cq26KqltyMdMKVvvBulRP/F/A8rLIQjcxz++iPAsbw+zOzlTvjwsto\\nWHPbqCRiOwY1nQ2pM714A5AuTHhdUDqB1O6gyHA43LL5Z/qHQF1hwFGPa4NrzQU6\\nyuGnBXj8ytqU0CwIPX4WecigUCAkVDNx\\n-----END CERTIFICATE-----\"], \"validated-certificate-chain\": [\"-----BEGIN CERTIFICATE-----\\nMIIEBDCCAuygAwIBAgIDAjppMA0GCSqGSIb3DQEBBQUAMEIxCzAJBgNVBAYTAlVT\\nHFa9llF7b1cq26KqltyMdMKVvvBulRP/F/A8rLIQjcxz++iPAsbw+zOzlTvjwsto\\nWHPbqCRiOwY1nQ2pM714A5AuTHhdUDqB1O6gyHA43LL5Z/qHQF1hwFGPa4NrzQU6\\nyuGnBXj8ytqU0CwIPX4WecigUCAkVDNx\\n-----END CERTIFICATE-----\"], \"known-pins\": [\"pin-sha256=\\\"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM=\\\"\", \"pin-sha256=\\\"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g=\\\"\"]}}"
+		}
+	}
+]
