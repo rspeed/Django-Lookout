@@ -49,3 +49,9 @@ TEMPLATES = [
 		'APP_DIRS': True
 	}
 ]
+
+LOOKOUT = {
+	'SAVE_REPORTS': True,
+	'INVALID_TEST_KEY': 'meaningless value',
+	'invalid_key_test': 'meaningless value'
+}
