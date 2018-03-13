@@ -1,32 +1,9 @@
-import re
 import typing
 
 from django.contrib import admin
 from django.http import HttpRequest
 
 from .models import Report
-
-
-
-def camel_to_label (camel_input: str) -> str:
-	""" Converts a camel-case string into a space-delimited label. """
-
-	# Handles capitalization logic
-	def capitalization (word: str, index: int) -> str:
-		# Keep acronyms upper-case
-		if word.isupper():
-			return word
-		# Capitalize the first word
-		if index == 0:
-			return word.capitalize()
-		# Everything else is lower-case
-		return word.lower()
-
-	# Split the input into individual words, acronyms, and numbers
-	words = re.findall(r'[A-Z]?[a-z]+|[A-Z]{2,}(?=[A-Z][a-z]|\d|\W|$)|\d+', camel_input)
-
-	# Convert (most) words to lower case, then join them with spaces
-	return ' '.join([capitalization(word, i) for i, word in enumerate(words)])
 
 
 
