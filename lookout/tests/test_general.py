@@ -76,7 +76,9 @@ class TestConfigWarnings (TestCase):
 				obj=app
 			)
 		]
-		self.assertCountEqual(app.checks, expected_warnings)
+		for expected_warning in expected_warnings:
+			print(expected_warning)
+			self.assertTrue(expected_warning in app.checks)
 
 
 
