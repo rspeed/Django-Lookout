@@ -13,6 +13,7 @@ class DjangoLookoutConfig(AppConfig):
 	name = 'lookout'
 	verbose_name = "Django Lookout"
 
+	checks = []
 
 	SAVE_REPORTS = True
 	""" Whether the Django-Lookout should always save new reports as ``lookout.models.Report`` instances. """
@@ -21,7 +22,11 @@ class DjangoLookoutConfig(AppConfig):
 	def ready (self):
 		""" Updates the AppConfig with values from the project settings. """
 
-		checks = []
+		checks = self.checks
+
+		@register_check
+		def show_checks (app_configs, **kwargs):
+			return checks
 
 		# Look for a settings dictionary
 		try:
@@ -49,9 +54,5 @@ class DjangoLookoutConfig(AppConfig):
 					checks.append(Warning(
 						"{0!r} is not a valid setting name for {1}.".format(key, self.verbose_name),
 						hint="The key must be all-caps and have an equivalent default setting.",
-						obj=settings
+						obj=self
 					))
-
-		@register_check
-		def show_checks (app_configs, **kwargs):
-			return checks
