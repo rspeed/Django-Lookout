@@ -121,9 +121,6 @@ class TestAdmin (TestCase):
 		# All fields should be marked as readonly
 		self.assertEqual(list(self.admin.get_readonly_fields(self.request, self.report)), self.DISPLAY_FIELDS)
 
-		# No excluded fields
-		self.assertIsNone(self.admin.get_exclude(self.request, self.report))
-
 
 	def test_readonly_post (self):
 		self.request.method = 'POST'
