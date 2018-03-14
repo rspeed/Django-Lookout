@@ -1,4 +1,4 @@
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 from django.utils import timezone, dateparse
 
@@ -87,9 +87,16 @@ class LegacyHPKPReportSchema (LegacyReportSchema):
 	@classmethod
 	def normalize (cls, report_data):
 		""" Adapts the legacy HPKP schema to the HTTP Reporting API schema """
+		now = datetime.now(timezone.utc)
+		report_datetime = dateparse.parse_datetime(report_data.pop('date-time'))
+
+		# Make sure ``report_datetime`` is timezone-aware
+		if timezone.is_naive(report_datetime):
+			# Assume UTC, since we can't reliably know where the client is located
+			report_datetime = timezone.make_aware(report_datetime, timezone.utc)
 
 		# The number of milliseconds between ``date-time`` and now
-		age = (timezone.now() - dateparse.parse_datetime(report_data.pop('date-time'))) / timedelta(milliseconds=1)
+		age = (now - report_datetime) / timedelta(milliseconds=1)
 
 		return cls.generic_class, {
 			'type': cls.type,

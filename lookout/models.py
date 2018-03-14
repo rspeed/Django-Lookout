@@ -3,12 +3,11 @@ import typing
 import json
 import uuid
 
-from datetime import timedelta
+from datetime import timedelta, datetime, timezone
 
 from django.db import models
 from django.utils import formats
 from django.utils.safestring import mark_safe
-from django.utils import timezone
 
 from pygments import highlight
 from pygments.lexers.data import JsonLexer
@@ -48,7 +47,7 @@ class ReportManager (models.Manager):
 			schema, report_data = schema.normalize(report_data)
 
 			# Use a static datetime object to make sure `created_time`, `incident_time`, and `body['age']` are consistent
-			now = timezone.now()
+			now = datetime.now(timezone.utc)
 
 			# Build the model instance
 			yield self.create(
