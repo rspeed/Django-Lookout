@@ -37,8 +37,8 @@ class ReportTestCase (type):
 				'Test{}'.format(name),
 				(cls,),
 				{
-					'fixture_name': fixture_file_name.stem,
-					'fixture_file_name': fixture_file_name
+					'fixture_name': str(fixture_file_name.stem),
+					'fixture_file_name': str(fixture_file_name)
 				}
 			)
 			new_class.__module__ = cls.__module__
