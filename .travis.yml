@@ -11,8 +11,7 @@ env:
   - DJANGO_VERSION=2.0.3
 
 install:
-  - pip install -q Django==$DJANGO_VERSION
-  - pip install -q -e ".[dev]" --upgrade-strategy only-if-needed
+  - pip install -q -e ".[dev]" "Django==$DJANGO_VERSION" --upgrade-strategy only-if-needed
 
 script:
   - coverage run --source=. runtests.py
