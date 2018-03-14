@@ -4,18 +4,6 @@ API
 .. automodule:: lookout
 
 
-lookout.admin
--------------
-
-.. automodule:: lookout.admin
-
-
-lookout.apps
-------------
-
-.. automodule:: lookout.apps
-
-
 lookout.exceptions
 ------------------
 
