@@ -46,7 +46,7 @@ class TestVersion (TestCase):
 		This test will fail if there isn't a VERSION.txt file in the ``lookout`` package directory.
 		"""
 		version = lookout.PackageVersion.from_file()
-		self.assertTrue(self.__valid_version(version), "Didn't get a valid version identifier from `PackageVersion.from_file`.")
+		self.assertTrue(self.__valid_version(version), "Didn't get a valid version identifier from 'PackageVersion.from_file'.")
 
 
 	def test_from_distribution (self):
@@ -55,7 +55,7 @@ class TestVersion (TestCase):
 		This test will fail if the package isn't installed.
 		"""
 		version = lookout.PackageVersion.from_distribution()
-		self.assertTrue(self.__valid_version(version), "Didn't get a valid version identifier from `PackageVersion.from_distribution`.")
+		self.assertTrue(self.__valid_version(version), "Didn't get a valid version identifier from 'PackageVersion.from_distribution'.")
 
 
 
@@ -77,7 +77,6 @@ class TestConfigWarnings (TestCase):
 			)
 		]
 		for expected_warning in expected_warnings:
-			print(expected_warning)
 			self.assertTrue(expected_warning in app.checks)
 
 

@@ -4,7 +4,7 @@ from .base import ReportSchema
 
 
 class GenericReportSchema (ReportSchema):
-	""" Represents the schema of an Out-of-Band Reporting API incident report. """
+	""" Represents the schema of an HTTP Reporting API incident report. """
 
 	class Meta:
 		abstract = True

@@ -37,7 +37,7 @@ Standards
 Currently Supported
 ~~~~~~~~~~~~~~~~~~~
 
-`Reporting API <https://wicg.github.io/reporting/>`__
+`HTTP Reporting API <https://wicg.github.io/reporting/>`__
 	A generic incident reporting API that can be used by all of the following standards. Django Lookout automatically converts reports using "legacy" schemas to the generic schema.
 
 `Content Security Policy <https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP>`__
@@ -65,7 +65,7 @@ These standards are planned to be supported in Django Lookout 1.0:
 Browser Implementation Status
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The only standard currently supported across all major browsers is Content Security Policy. It's hoped that the generic Reporting API will significantly improve the situation in the future.
+The only standard currently supported across all major browsers is Content Security Policy. It's hoped that the HTTP Reporting API will significantly improve the situation in the future.
 
 .. note:: This table only considers a feature supported if it includes reporting functionality.
 .. note:: Internet Explorer is excluded due to the fact that it doesn't support any of these features via standard headers.
@@ -75,7 +75,7 @@ Standard                            Chrome                   Firefox            
 ==================================  =======================  =======================  =======================  ==================
 **Content Security Policy (CSP)**   Supported                Supported                Supported [#ecsp]_       Supported [#scsp]_
 **HTTP Public Key Pinning (HPKP)**  Supported [#chpkp]_      Not Supported [#fhpkp]_  Not Supported [#ehpkp]_  Not Supported
-**Reporting API**                   Not Supported [#cgapi]_  Not Supported            Not Supported            Not Supported
+**HTTP Reporting API**              Not Supported [#cgapi]_  Not Supported            Not Supported            Not Supported
 **Network Error Logging (NEL)**     Not Supported [#cnel]_   Not Supported            Not Supported [#enel]_   Not Supported
 **Expect-CT**                       Supported [#cect]_       Not Supported [#fect]_   ?                        ?
 **Expect-Staple**                   ?                        ?                        ?                        ?

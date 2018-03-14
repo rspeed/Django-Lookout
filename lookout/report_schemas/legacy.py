@@ -4,7 +4,7 @@ from .base import ReportSchema
 
 
 class LegacyReportSchema (ReportSchema):
-	""" Parent class for report schemas which can convert reports in a legacy schema into their `GenericReportSchema` counterpart. """
+	""" Parent class for report schemas which can convert reports in a legacy schema into their ```GenericReportSchema``` counterpart. """
 
 	class Meta:
 		abstract = True
@@ -12,11 +12,12 @@ class LegacyReportSchema (ReportSchema):
 
 	@classproperty
 	def generic_class (cls):
+		""" The ``GenericReportSchema`` subclass to which this schema normalizes. """
 		return NotImplementedError
 
 
-	# Property name of the root object which contains the schema's body
 	root_object_name = None
+	""" Property name of the root object which contains the schema's body. """
 
 
 	@classproperty

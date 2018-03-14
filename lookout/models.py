@@ -26,7 +26,7 @@ __all__ = ['Report']
 class ReportManager (models.Manager):
 	""" Manager for the Report model. """
 
-	def create_from_json (self, report_json: str) -> typing.Iterator[models.Model]:
+	def create_from_json (self, report_json: typing.AnyStr) -> typing.Iterator[models.Model]:
 		""" Converts JSON data into a list of Report instances. """
 
 		logger.debug("Decoding JSON")
@@ -97,7 +97,7 @@ class Report (models.Model):
 		return report_schema_registry.get(self.type)
 
 
-	def __str__ (self):
+	def __str__ (self) -> str:
 		""" Something like " """
 		return "{} report from {}".format(
 			self.schema.name,

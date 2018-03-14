@@ -9,6 +9,7 @@ from django.conf import settings
 import lookout
 
 
+
 # Configure Django
 settings.configure(
 	DEBUG=True,
@@ -82,6 +83,7 @@ html_sidebars = {
 		'searchbox.html',
 	]
 }
+
 
 
 INDENT_SIZE = 2
