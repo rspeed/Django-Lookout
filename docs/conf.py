@@ -84,17 +84,20 @@ html_sidebars = {
 }
 
 
+INDENT_SIZE = 2
 
 # Fix pydoc's 8-space indentation
 def fix_docstring (app, what, name, obj, options, lines):
-	indent_pattern = re.compile(r'^( {8}|)+')
+	indent_pattern = re.compile(r'((?: {8})+)')
 
 	def shift_indent (string):
-		indents = len(indent_pattern.match(string)[0]) // 4
-		return indent_pattern.sub(' ' * indents, string)
+		# The number of 8-space indentations
+		indents = indent_pattern.match(string).end() // 8
+		return indent_pattern.sub(' ' * indents * INDENT_SIZE, string)
 
 	# The list has to be updated in-place
 	lines[:] = map(shift_indent, lines)
+
 
 def setup (app):
 	app.connect('autodoc-process-docstring', fix_docstring)
