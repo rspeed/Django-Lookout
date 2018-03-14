@@ -91,12 +91,21 @@ def fix_docstring (app, what, name, obj, options, lines):
 	indent_pattern = re.compile(r'((?: {8})+)')
 
 	def shift_indent (string):
-		# The number of 8-space indentations
-		indents = indent_pattern.match(string).end() // 8
-		return indent_pattern.sub(' ' * indents * INDENT_SIZE, string)
+		match = indent_pattern.match(string)
+
+		if match is not None:
+			# The number of 8-space indentations
+			indents = match.end() // 8
+
+			return indent_pattern.sub(' ' * indents * INDENT_SIZE, string)
+
+		# If the line isn't indented, return it unmodified
+		return string
+
 
 	# The list has to be updated in-place
 	lines[:] = map(shift_indent, lines)
+
 
 
 def setup (app):
