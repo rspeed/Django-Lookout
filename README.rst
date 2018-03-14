@@ -26,53 +26,7 @@ It's important to note that Django Lookout only handles the *reporting* part of 
 Install and Configure
 ---------------------
 
-.. warning::  If you're using HPKP, Django Lookout *must* be set up `on a different domain name <https://developers.google.com/web/updates/2015/09/HPKP-reporting-with-chrome-46#one_last_gotcha>`_.
-
-
-Step 1
-~~~~~~
-
-.. code:: bash
-
-	pip install Django-Lookout
-
-Add the app to your Django project's ``settings.py``:
-
-.. code:: python
-
-	INSTALLED_APPS = [
-		...
-		'lookout',
-		...
-	]
-
-
-Step 2
-~~~~~~
-
-Add the API endpoint to ``urls.py``.
-
-.. note:: You can set the pattern to whatever you want. That's where you'll be pointing ``report-uri``.
-.. note:: Be mindful of trailing slashes.
-
-.. code:: python
-
-	urlpatterns = [
-		...
-		# Django Lookout
-		url(r'^reporting', include('lookout.urls')),
-		...
-	]
-
-
-Step 3
-~~~~~~
-
-Run the database migrations:
-
-.. code:: bash
-
-	./manage.py migrate lookout
+`See documentation. <http://django-lookout.readthedocs.io/en/latest/install.html>`__
 
 
 
