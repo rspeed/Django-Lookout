@@ -6,6 +6,7 @@ Django Lookout
 		:caption: Contents:
 
 		install
+		settings
 		api
 		todo
 
