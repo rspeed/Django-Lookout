@@ -84,8 +84,7 @@ class LegacyHPKPReportSchema (LegacyReportSchema):
 	generic_class = HPKPReportSchema
 
 
-	@classmethod
-	def normalize (cls, report_data):
+	def normalize (self, report_data):
 		""" Adapts the legacy HPKP schema to the HTTP Reporting API schema """
 		now = datetime.now(timezone.utc)
 		report_datetime = dateparse.parse_datetime(report_data.pop('date-time'))
@@ -98,8 +97,8 @@ class LegacyHPKPReportSchema (LegacyReportSchema):
 		# The number of milliseconds between ``date-time`` and now
 		age = (now - report_datetime) / timedelta(milliseconds=1)
 
-		return cls.generic_class, {
-			'type': cls.type,
+		return self.generic_class, {
+			'type': self.type,
 			'age': age,
 			'url': 'https://{}/'.format(report_data.get('hostname', '')),
 			'body': report_data

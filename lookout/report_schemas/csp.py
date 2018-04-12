@@ -125,11 +125,10 @@ class LegacyCSPReportSchema (LegacyReportSchema):
 	}
 
 
-	@classmethod
-	def normalize (cls, report_data):
+	def normalize (self, report_data):
 		""" Adapts the legacy CSP schema. """
 
-		report_data = report_data[cls.root_object_name]
+		report_data = report_data[self.root_object_name]
 
 		# Remap keys
 		remap = {
@@ -144,8 +143,8 @@ class LegacyCSPReportSchema (LegacyReportSchema):
 				if value is not None:
 					report_data[to_key] = value
 
-		return cls.generic_class, {
-			'type': cls.generic_class.type,
+		return self.generic_class, {
+			'type': self.generic_class.type,
 			'age': 0,  # CSP reports don't provide a date :\
 			'url': report_data.pop('document-uri'),
 			'body': report_data

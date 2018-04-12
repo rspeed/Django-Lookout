@@ -1,7 +1,6 @@
 import logging
 
 from django.http import HttpResponse, HttpResponseBadRequest, HttpRequest
-from django.template.loader import get_template
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import View

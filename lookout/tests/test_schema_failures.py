@@ -15,7 +15,7 @@ class TestReportSchemaNotImplemented (TestCase):
 				name = 'empty'
 				description = "empty"
 
-			BadSchema.schema
+			BadSchema().schema
 		except NotImplementedError:
 			pass
 		else:
@@ -29,7 +29,7 @@ class TestReportSchemaNotImplemented (TestCase):
 				name = 'empty'
 				description = "empty"
 
-			BadSchema.type
+			BadSchema().type
 		except NotImplementedError:
 			pass
 		else:
@@ -43,7 +43,7 @@ class TestReportSchemaNotImplemented (TestCase):
 				type = 'empty'
 				description = "empty"
 
-			BadSchema.name
+			BadSchema().name
 		except NotImplementedError:
 			pass
 		else:
@@ -57,7 +57,7 @@ class TestReportSchemaNotImplemented (TestCase):
 				type = 'empty'
 				name = 'empty'
 
-			BadSchema.description
+			BadSchema().description
 		except NotImplementedError:
 			pass
 		else:
@@ -75,7 +75,7 @@ class TestGenericReportSchemaNotImplemented (TestCase):
 				name = 'empty'
 				description = "empty"
 
-			BadSchema.body_schema
+			BadSchema().body_schema
 		except NotImplementedError:
 			pass
 		else:

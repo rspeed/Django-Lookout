@@ -1,4 +1,3 @@
-from ..utils import classproperty
 from .base import ReportSchema
 
 
@@ -10,8 +9,8 @@ class GenericReportSchema (ReportSchema):
 		abstract = True
 
 
-	@classproperty
-	def body_schema (cls):
+	@property
+	def body_schema (self):
 		"""
 		A class attribute containing the sub-schema for the report type's ``body`` property.
 		The HTTP Reporting API standardized the root schema of reports, with each type differing only in the value of ``type`` and the structure of ``body``.
@@ -19,19 +18,19 @@ class GenericReportSchema (ReportSchema):
 		raise NotImplementedError()
 
 
-	@classproperty
-	def schema (cls):
+	@property
+	def schema (self):
 		return {
 			'$schema': "http://json-schema.org/draft-04/schema#",
-			'title': cls.name,
-			'description': cls.description,
+			'title': self.name,
+			'description': self.description,
 			'type': 'object',
 			'required': ['type', 'age', 'url', 'body'],
 			'properties': {
 				'type': {
 					'description': "The type of data the report contains.",
 					'type': 'string',
-					'enum': [cls.type]
+					'enum': [self.type]
 				},
 				'age': {
 					'description': "The number of milliseconds between the report's timestamp and the current time.",
@@ -47,7 +46,7 @@ class GenericReportSchema (ReportSchema):
 						'description': "The contents of the report as defined by the type.",
 						'type': 'object'
 					},
-					**cls.body_schema
+					**self.body_schema
 				}
 			}
 		}

@@ -13,7 +13,7 @@ from pygments import highlight
 from pygments.lexers.data import JsonLexer
 from pygments.formatters.html import HtmlFormatter
 
-from .report_schemas import ReportSchema, get_matching_schema, report_schema_registry
+from .report_schemas import ReportSchema, report_schema_registry
 
 
 logger = logging.getLogger(__name__)
@@ -41,7 +41,7 @@ class ReportManager (models.Manager):
 			logger.debug("Attempt to determine the type of report by testing each schema.")
 
 			# Figure out what type of report it is
-			schema = get_matching_schema(report_data)
+			schema = report_schema_registry.get_matching_schema(report_data)
 
 			# Normalize to a generic schema
 			schema, report_data = schema.normalize(report_data)

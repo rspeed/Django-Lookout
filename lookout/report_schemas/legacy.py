@@ -1,4 +1,3 @@
-from ..utils import classproperty
 from .base import ReportSchema
 
 
@@ -10,8 +9,8 @@ class LegacyReportSchema (ReportSchema):
 		abstract = True
 
 
-	@classproperty
-	def generic_class (cls):
+	@property
+	def generic_class (self):
 		""" The ``GenericReportSchema`` subclass to which this schema normalizes. """
 		return NotImplementedError
 
@@ -20,41 +19,41 @@ class LegacyReportSchema (ReportSchema):
 	""" Property name of the root object which contains the schema's body. """
 
 
-	@classproperty
-	def type (cls):
-		return 'legacy_{}'.format(cls.generic_class.type)
+	@property
+	def type (self):
+		return 'legacy_{}'.format(self.generic_class.type)
 
 
-	@classproperty
-	def name (cls):
-		return "Legacy {}".format(cls.generic_class.name)
+	@property
+	def name (self):
+		return "Legacy {}".format(self.generic_class.name)
 
 
-	@classproperty
-	def description (cls):
-		return "Legacy {}".format(cls.generic_class.description)
+	@property
+	def description (self):
+		return "Legacy {}".format(self.generic_class.description)
 
 
-	@classproperty
-	def body_schema (cls):
-		return cls.generic_class.body_schema
+	@property
+	def body_schema (self):
+		return self.generic_class.body_schema
 
 
-	@classproperty
-	def schema (cls):
+	@property
+	def schema (self):
 		schema_object = {
 			'$schema': 'http://json-schema.org/draft-04/schema#',
-			'title': cls.name,
-			'description': cls.description,
+			'title': self.name,
+			'description': self.description,
 			'type': 'object'
 		}
 
-		if cls.root_object_name is None:
-			schema_object.update(cls.body_schema)
+		if self.root_object_name is None:
+			schema_object.update(self.body_schema)
 		else:
 			schema_object.update({
-				'required': [cls.root_object_name],
-				cls.root_object_name: cls.body_schema
+				'required': [self.root_object_name],
+				self.root_object_name: self.body_schema
 			})
 
 		return schema_object

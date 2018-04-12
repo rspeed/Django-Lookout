@@ -1,11 +1,11 @@
-from .generic import GenericReportSchema
+from .base import ReportSchema
 
 
 __all__ = ['FallbackReportSchema']
 
 
 
-class FallbackReportSchema (GenericReportSchema):
+class FallbackReportSchema (ReportSchema):
 	""" Catchall fallback. """
 
 	type = 'misc'
